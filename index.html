@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AERON - The Pioneer of Neuro-Trance. Experience Genesis: 11 chapters of sonic evolution.">
+    <meta property="og:title" content="AERON | Genesis - Neuro-Trance">
+    <meta property="og:description" content="Music engineered for elevated consciousness. The Genesis saga is live.">
+    <meta property="og:image" content="Capa_Canva.png">
+    <title>AERON | Genesis - The Pioneer of Neuro-Trance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B35;
+            --gold: #FFD700;
+            --dark: #0a0a0f;
+            --dark-blue: #0f1419;
+            --cyan: #00d9ff;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1030 50%, #0a0a0f 100%);
+            z-index: 1;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1); 
+                opacity: 0.5; 
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.2); 
+                opacity: 0.8; 
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 20px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-main {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            letter-spacing: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--gold), var(--cyan));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+            margin-bottom: 30px;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-primary:hover::before {
+            left: 100%;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.6);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { 
+                transform: translateX(-50%) translateY(0); 
+            }
+            40% { 
+                transform: translateX(-50%) translateY(-20px); 
+            }
+            60% { 
+                transform: translateX(-50%) translateY(-10px); 
+            }
+        }
+
+        .about {
+            padding: 120px 20px;
+            background: linear-gradient(180deg, var(--dark) 0%, var(--dark-blue) 100%);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(90deg, var(--gold), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .about-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        .about-card h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .about-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .music-section {
+            padding: 120px 20px;
+            background: var(--dark);
+        }
+
+        .spotify-container {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .spotify-container iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            border: none;
+        }
+
+        .track-gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gallery-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--cyan);
+            margin-bottom: 60px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .track-item {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(0, 217, 255, 0.1));
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .track-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--gold);
+            box-shadow: 0 25px 60px rgba(255, 107, 53, 0.4);
+        }
+
+        .track-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .track-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+        }
+
+        .track-info {
+            padding: 25px;
+        }
+
+        .track-chapter {
+            font-size: 0.9rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .track-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .track-desc {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .social-section {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, var(--dark) 0%, #1a1a2e 100%);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .social-btn {
+            padding: 20px 40px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-btn:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+        }
+
+        footer {
+            padding: 50px 20px;
+            background: var(--dark);
+            text-align: center;
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo-main {
+                letter-spacing: 10px;
+            }
+            .tracks-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <h1 class="logo-main">AERON</h1>
+            <p class="subtitle">The Pioneer of Neuro-Trance</p>
+            <p class="hero-description">
+                Music engineered for elevated consciousness. Experience Genesis: 
+                11 chapters of sonic evolution designed to synchronize with your neural pathways.
+            </p>
+            <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" rel="noopener" class="cta-primary">
+                ▶ LISTEN ON SPOTIFY
+            </a>
+        </div>
+        <div class="scroll-hint">↓ Explore The Journey</div>
+    </section>
+
+    <section class="about">
+        <h2 class="section-title">THE VISION</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>🎵 Neuro-Trance</h3>
+                <p>
+                    A revolutionary fusion of melodic trance, synthwave, and scientifically engineered 
+                    soundscapes designed to induce Flow State. Every frequency, every beat crafted with precision.
+                </p>
+            </div>
+            <div class="about-card">
+                <h3>🔥 The Genesis Saga</h3>
+                <p>
+                    11 chapters chronicling the Hero's Journey. From the first spark to transcendence. 
+                    This isn't just an album—it's an immersive experience that transforms consciousness.
+                </p>
+            </div>
+            <div class="about-card">
+                <h3>⚡ Performance Optimized</h3>
+                <p>
+                    Engineered for creators, athletes, entrepreneurs. Music that doesn't just entertain—
+                    it elevates. Synchronize your brainwaves. Unlock peak performance.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="music-section">
+        <h2 class="section-title">LISTEN NOW</h2>
+        <div class="spotify-container">
+            <iframe 
+                src="https://open.spotify.com/embed/album/2OQW9vnFsR5Zp6w5Iqk0R6?utm_source=generator" 
+                allowfullscreen 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <div class="track-gallery">
+            <h3 class="gallery-title">The Genesis Journey: 11 Chapters</h3>
+            <div class="tracks-grid">
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/5Hcz5xhJB4aEEfyEGlKgKc" target="_blank" rel="noopener" class="track-link">
+                        <img src="Spark_the_Fire.png" alt="Spark the Fire" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 1</div>
+                            <div class="track-name">Spark the Fire</div>
+                            <p class="track-desc">The initial spark. The hero awakens.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/1u6bRqCY8hPGdLjIMHSZvk" target="_blank" rel="noopener" class="track-link">
+                        <img src="Spark_the_Change.png" alt="Spark the Change" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 2</div>
+                            <div class="track-name">Spark the Change</div>
+                            <p class="track-desc">The decision to transform. Change begins.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/2i4Rb8ijq8B5A1w3DXSCf7" target="_blank" rel="noopener" class="track-link">
+                        <img src="Hunting_Shadows.png" alt="Hunting Shadows" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 3</div>
+                            <div class="track-name">Hunting Shadows</div>
+                            <p class="track-desc">Confronting inner demons. The battle within.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/4ZJLwh0FxQMj3MkvYQKJk9" target="_blank" rel="noopener" class="track-link">
+                        <img src="Unbreakable.png" alt="Unbreakable" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 4</div>
+                            <div class="track-name">Unbreakable</div>
+                            <p class="track-desc">First victory. Proof of strength.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/1D8xaP00YnDBqjgNPwpF3h" target="_blank" rel="noopener" class="track-link">
+                        <img src="Unbreakable_Steel.png" alt="Unbreakable Steel" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 5</div>
+                            <div class="track-name">Unbreakable Steel</div>
+                            <p class="track-desc">Transformation. Resilience forged in steel.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/3CZx9lYFLjJ3kqMhcHfZ4J" target="_blank" rel="noopener" class="track-link">
+                        <img src="Flow_State.png" alt="Flow State" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 6</div>
+                            <div class="track-name">Flow State</div>
+                            <p class="track-desc">The genius focus. Core of Neuro-Trance.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/7AUc4h4YzNXcRuXGf8WuHy" target="_blank" rel="noopener" class="track-link">
+                        <img src="Rise_Like_the_Sun.png" alt="Rise Like the Sun" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 7</div>
+                            <div class="track-name">Rise Like the Sun</div>
+                            <p class="track-desc">Rebirth. The Phoenix anthem.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/1iA7sZ5oLSxZ3E8yfA8rMT" target="_blank" rel="noopener" class="track-link">
+                        <img src="Breaking_the_Sky.png" alt="Breaking the Sky" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 8</div>
+                            <div class="track-name">Breaking the Sky</div>
+                            <p class="track-desc">Demonstration of power. Breaking limits.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/6oEzIGXhjDYa3cjCqRN2fM" target="_blank" rel="noopener" class="track-link">
+                        <img src="Echoes_of_the_Sky.png" alt="Echoes of the Sky" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 9</div>
+                            <div class="track-name">Echoes of the Sky</div>
+                            <p class="track-desc">Acceptance of power. Echoes of conquest.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/0CIJ4m6XD9YSqKBqYSP9zO" target="_blank" rel="noopener" class="track-link">
+                        <img src="Eternal_Pulse.png" alt="Eternal Pulse" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 10</div>
+                            <div class="track-name">Eternal Pulse</div>
+                            <p class="track-desc">New condition. The eternal heartbeat.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="track-item">
+                    <a href="https://open.spotify.com/intl-pt/track/2xzXNEHl0m0aPFm4hjWm7g" target="_blank" rel="noopener" class="track-link">
+                        <img src="Eternal_Ascent.png" alt="Eternal Ascent" class="track-image">
+                        <div class="track-info">
+                            <div class="track-chapter">Chapter 11</div>
+                            <div class="track-name">Eternal Ascent</div>
+                            <p class="track-desc">Final transcendence. Endless and free.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-section">
+        <h2 class="section-title">CONNECT</h2>
+        <p style="font-size: 1.3rem; color: rgba(255, 255, 255, 0.8); max-width: 600px; margin: 0 auto 20px;">
+            Join the journey. Follow AERON across platforms.
+        </p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/aeron_oficial/" target="_blank" rel="noopener" class="social-btn">
+                📸 Instagram
+            </a>
+            <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" rel="noopener" class="social-btn">
+                🎵 Spotify
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 AERON. All rights reserved.</p>
+        <p style="margin-top: 15px; font-size: 0.9rem;">
+            Neuro-Trance: Music Engineered for Elevated States of Consciousness
+        </p>
+    </footer>
+
+    <script>
+        document.querySelector('.scroll-hint').addEventListener('click', () => {
+            document.querySelector('.about').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-glow');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = 'translate(-50%, -50%) scale(' + (1 + scrolled * 0.0005) + ')';
+                hero.style.opacity = Math.max(0, 1 - scrolled * 0.001);
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        document.querySelectorAll('.track-item, .about-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
