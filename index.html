@@ -117,6 +117,31 @@
             padding: 0 20px;
             animation: fadeIn 1.5s ease-out;
         }
+        .hero-logos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .logo-aeron {
+            max-width: 700px;
+            width: 85%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(255, 107, 53, 0.6));
+            transition: transform 0.3s ease;
+        }
+        .logo-genesis {
+            max-width: 550px;
+            width: 65%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(255, 215, 0, 0.6));
+            transition: transform 0.3s ease;
+        }
+        .logo-aeron:hover,
+        .logo-genesis:hover {
+            transform: scale(1.05);
+        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -314,8 +339,10 @@
         <div class="hero-bg"></div>
         <div class="hero-glow"></div>
         <div class="hero-content">
-            <img src="AERON.png" alt="AERON" class="logo-aeron" style="max-width: 800px; width: 90%; height: auto; margin-bottom: 20px;">
-            <img src="GENESIS.png" alt="GENESIS" class="logo-genesis" style="max-width: 600px; width: 70%; height: auto; margin-bottom: 30px;">
+            <div class="hero-logos">
+                <img src="AERON.png" alt="AERON" class="logo-aeron">
+                <img src="GENESIS.png" alt="GENESIS" class="logo-genesis">
+            </div>
             
             <div class="lang-content active" data-lang="pt">
                 <p class="subtitle">Um dos Pioneiros do Neuro-Trance</p>
@@ -343,16 +370,16 @@
     <!-- ABOUT/BIO -->
     <section class="about">
         <div class="lang-content active" data-lang="pt">
-            <h2 class="section-title">SOBRE AERON</h2>
+            <h2 class="section-title">SOBRE GENESIS</h2>
             <div class="bio-content">
                 <p>
-                    AERON nasceu da interseção entre neurociência, música eletrônica e desenvolvimento pessoal. 
-                    Criado por Rodrigo Borin, engenheiro mecânico, empreendedor e estudioso de performance humana. 
-                    O projeto representa uma nova categoria de música: <strong>Neuro-Trance</strong> — um gênero inédito 
-                    que combina trance melódico com neurociência aplicada.
+                    <strong>Genesis</strong> é o álbum de estreia de AERON que nasceu da interseção entre neurociência, 
+                    música eletrônica e desenvolvimento pessoal. Criado por Rodrigo Borin, engenheiro mecânico, 
+                    empreendedor e estudioso de performance humana, o álbum representa uma nova categoria de música: 
+                    <strong>Neuro-Trance</strong> — um gênero inédito que combina trance melódico com neurociência aplicada.
                 </p>
                 <p>
-                    Genesis é uma saga de 11 capítulos que seguem a jornada do herói, desde o despertar inicial 
+                    <strong>Genesis</strong> é uma saga de 11 capítulos que seguem a jornada do herói, desde o despertar inicial 
                     até a transcendência final. Cada faixa foi projetada para induzir estados específicos de 
                     consciência, combinando trance melódico, synthwave e estruturas sonoras cientificamente calibradas.
                 </p>
@@ -371,22 +398,22 @@
                 </p>
                 <p>
                     <strong>Para empreendedores, atletas, criadores e todos que buscam performance de elite: 
-                    AERON é um dos pioneiros do Neuro-Trance — a trilha sonora cientificamente projetada para sua evolução.</strong>
+                    Genesis é a trilha sonora cientificamente projetada para sua evolução.</strong>
                 </p>
             </div>
         </div>
         
         <div class="lang-content" data-lang="en">
-            <h2 class="section-title">ABOUT AERON</h2>
+            <h2 class="section-title">ABOUT GENESIS</h2>
             <div class="bio-content">
                 <p>
-                    AERON was born at the intersection of neuroscience, electronic music, and personal development. 
-                    Created by Rodrigo Borin, mechanical engineer, entrepreneur, and student of human performance. 
-                    The project represents a new category of music: <strong>Neuro-Trance</strong> — an unprecedented genre 
-                    that combines melodic trance with applied neuroscience.
+                    <strong>Genesis</strong> is AERON's debut album born at the intersection of neuroscience, 
+                    electronic music, and personal development. Created by Rodrigo Borin, mechanical engineer, 
+                    entrepreneur, and student of human performance, the album represents a new category of music: 
+                    <strong>Neuro-Trance</strong> — an unprecedented genre that combines melodic trance with applied neuroscience.
                 </p>
                 <p>
-                    Genesis is an 11-chapter saga following the hero's journey, from the initial awakening 
+                    <strong>Genesis</strong> is an 11-chapter saga following the hero's journey, from the initial awakening 
                     to the final transcendence. Each track was designed to induce specific states of consciousness, 
                     combining melodic trance, synthwave, and scientifically calibrated sound structures.
                 </p>
@@ -405,7 +432,7 @@
                 </p>
                 <p>
                     <strong>For entrepreneurs, athletes, creators, and all who seek elite performance: 
-                    AERON is one of the pioneers of Neuro-Trance — the scientifically designed soundtrack to your evolution.</strong>
+                    Genesis is the scientifically designed soundtrack to your evolution.</strong>
                 </p>
             </div>
         </div>
