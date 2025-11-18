@@ -17,6 +17,8 @@
     <meta name="twitter:image" content="https://eloquent-cupcake-972c0c.netlify.app/AERON%20GENESIS.png">
     <link rel="canonical" href="https://eloquent-cupcake-972c0c.netlify.app">
     <title>AERON | Genesis - Neuro-Trance | Música para Flow State e Performance</title>
+    <link rel="icon" type="image/png" href="AERON.png">
+    <link rel="apple-touch-icon" href="AERON.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -962,7 +964,7 @@
                 <span class="lang-content" data-lang="en">Get exclusive news, releases and VIP access to special content</span>
             </p>
             
-            <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+            <form name="newsletter" method="POST" action="/success" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
                 <input type="hidden" name="form-name" value="newsletter" />
                 <p style="display: none;"><input name="bot-field" /></p>
                 <input type="email" name="email" placeholder="seu@email.com" required
@@ -992,7 +994,7 @@
                 </p>
             </div>
             
-            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; flex-direction: column; gap: 20px;">
+            <form name="contact" method="POST" action="/success" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; flex-direction: column; gap: 20px;">
                 <input type="hidden" name="form-name" value="contact" />
                 <p style="display: none;"><input name="bot-field" /></p>
                 <input type="text" name="name" placeholder="Nome / Name" required
@@ -1001,9 +1003,7 @@
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem;">
                 <select name="subject" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem;">
-                    <option value="" disabled selected>
-                        <span class="lang-content active" data-lang="pt">Assunto / Subject</span>
-                    </option>
+                    <option value="" disabled selected>Assunto / Subject</option>
                     <option value="booking">Booking</option>
                     <option value="press">Press / Media</option>
                     <option value="collaboration">Collaboration</option>
