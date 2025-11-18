@@ -436,6 +436,52 @@
             border-top: 1px solid rgba(255, 107, 53, 0.2);
         }
         
+        /* PARALLAX EFFECTS */
+        .parallax-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            transform: translateZ(-1px) scale(1.5);
+            z-index: -1;
+            transition: transform 0.5s cubic-bezier(0.33, 0.66, 0.66, 1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .zoom-on-scroll {
+            transform: scale(0.95);
+            opacity: 0.8;
+            transition: transform 1s cubic-bezier(0.33, 0.66, 0.66, 1), opacity 0.8s ease-out;
+        }
+        
+        .zoom-on-scroll.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
         @media (max-width: 768px) {
             .logo-main { letter-spacing: 10px; }
             .tracks-grid { grid-template-columns: 1fr; }
@@ -913,28 +959,40 @@
                 <!-- Bio -->
                 <div style="background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255, 107, 53, 0.2); transition: transform 0.3s ease;">
                     <h3 style="color: var(--gold); font-size: 1.5rem; margin-bottom: 15px;">📄 Bio</h3>
-                    <p style="color: var(--light); font-size: 0.95rem;">
+                    <p style="color: var(--light); font-size: 0.95rem; margin-bottom: 20px;">
                         <span class="lang-content active" data-lang="pt">Biografia completa para press releases</span>
                         <span class="lang-content" data-lang="en">Complete biography for press releases</span>
                     </p>
+                    <a href="AERON-Bio.txt" download style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s ease;">
+                        <span class="lang-content active" data-lang="pt">📥 BAIXAR</span>
+                        <span class="lang-content" data-lang="en">📥 DOWNLOAD</span>
+                    </a>
                 </div>
                 
                 <!-- Photos -->
                 <div style="background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255, 107, 53, 0.2);">
                     <h3 style="color: var(--gold); font-size: 1.5rem; margin-bottom: 15px;">📸 Photos</h3>
-                    <p style="color: var(--light); font-size: 0.95rem;">
+                    <p style="color: var(--light); font-size: 0.95rem; margin-bottom: 20px;">
                         <span class="lang-content active" data-lang="pt">Fotos de alta resolução para download</span>
                         <span class="lang-content" data-lang="en">High-resolution photos for download</span>
                     </p>
+                    <a href="AERON GENESIS.png" download style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s ease;">
+                        <span class="lang-content active" data-lang="pt">📥 BAIXAR</span>
+                        <span class="lang-content" data-lang="en">📥 DOWNLOAD</span>
+                    </a>
                 </div>
                 
                 <!-- Logos -->
                 <div style="background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255, 107, 53, 0.2);">
                     <h3 style="color: var(--gold); font-size: 1.5rem; margin-bottom: 15px;">🎨 Logos</h3>
-                    <p style="color: var(--light); font-size: 0.95rem;">
+                    <p style="color: var(--light); font-size: 0.95rem; margin-bottom: 20px;">
                         <span class="lang-content active" data-lang="pt">Logos AERON & GENESIS em alta qualidade</span>
                         <span class="lang-content" data-lang="en">AERON & GENESIS logos in high quality</span>
                     </p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="AERON.png" download style="display: inline-block; padding: 12px 20px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 0.9rem;">AERON</a>
+                        <a href="GENESIS.png" download style="display: inline-block; padding: 12px 20px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 0.9rem;">GENESIS</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -952,8 +1010,10 @@
                 <span class="lang-content" data-lang="en">Get exclusive news, releases and VIP access to special content</span>
             </p>
             
-            <form style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-                <input type="email" placeholder="seu@email.com" required
+            <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                <input type="hidden" name="form-name" value="newsletter" />
+                <p style="display: none;"><input name="bot-field" /></p>
+                <input type="email" name="email" placeholder="seu@email.com" required
                     style="flex: 1; min-width: 250px; padding: 18px 25px; border-radius: 50px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem; transition: all 0.3s ease;">
                 <button type="submit"
                     style="padding: 18px 45px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; border: none; border-radius: 50px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
@@ -980,12 +1040,14 @@
                 </p>
             </div>
             
-            <form style="display: flex; flex-direction: column; gap: 20px;">
-                <input type="text" placeholder="Nome / Name" required
+            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; flex-direction: column; gap: 20px;">
+                <input type="hidden" name="form-name" value="contact" />
+                <p style="display: none;"><input name="bot-field" /></p>
+                <input type="text" name="name" placeholder="Nome / Name" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem;">
-                <input type="email" placeholder="Email" required
+                <input type="email" name="email" placeholder="Email" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem;">
-                <select required
+                <select name="subject" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem;">
                     <option value="" disabled selected>
                         <span class="lang-content active" data-lang="pt">Assunto / Subject</span>
@@ -995,7 +1057,7 @@
                     <option value="collaboration">Collaboration</option>
                     <option value="general">General Inquiry</option>
                 </select>
-                <textarea placeholder="Mensagem / Message" rows="6" required
+                <textarea name="message" placeholder="Mensagem / Message" rows="6" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem; resize: vertical;"></textarea>
                 <button type="submit"
                     style="padding: 20px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; border: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 2px;">
@@ -1057,6 +1119,56 @@
                 hero.style.transform = `translate(-50%, -50%) scale(${1 + scrolled * 0.0005})`;
                 hero.style.opacity = Math.max(0, 1 - scrolled * 0.001);
             }
+        });
+        
+        // Advanced Parallax & Fade-in Effects
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Add fade-in effects to sections
+        window.addEventListener('DOMContentLoaded', () => {
+            // Observe all sections for fade-in
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('fade-in');
+                observer.observe(section);
+            });
+            
+            // Parallax for hero image
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.classList.add('zoom-on-scroll');
+                observer.observe(heroContent);
+            }
+            
+            // Smooth parallax scrolling
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                
+                // Parallax effect for hero background
+                const hero = document.querySelector('.hero');
+                if (hero && scrolled < window.innerHeight) {
+                    hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
+                }
+                
+                // Parallax for logos
+                const logos = document.querySelectorAll('.hero-logos img');
+                logos.forEach((logo, index) => {
+                    if (scrolled < window.innerHeight) {
+                        const speed = 0.3 + (index * 0.1);
+                        logo.style.transform = `translateY(${scrolled * speed}px)`;
+                    }
+                });
+            });
         });
     </script>
 </body>
