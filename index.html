@@ -221,14 +221,10 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: none;
+            display: flex;
             align-items: center;
             gap: 6px;
             margin-left: 5px;
-        }
-        
-        .pwa-install-btn.show {
-            display: flex;
         }
         
         .pwa-install-btn:hover {
@@ -1959,36 +1955,39 @@
             console.log('[PWA] Prompt de instalação disponível');
             e.preventDefault();
             deferredPrompt = e;
-            
-            // Mostrar botão de instalação no header
-            if (installButton) {
-                installButton.classList.add('show');
-            }
         });
         
         // Ao clicar no botão de instalação
         if (installButton) {
             installButton.addEventListener('click', async () => {
+                // Verificar se é iOS
+                const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+                
                 if (!deferredPrompt) {
                     console.log('[PWA] Prompt de instalação não disponível');
-                    // Mostrar mensagem para iOS
-                    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-                        alert('Para instalar no iOS:\n1. Toque em Compartilhar 📤\n2. Escolha "Adicionar à Tela de Início"');
+                    
+                    if (isIOS) {
+                        // Instruções para iOS
+                        alert('📱 INSTALAR NO iOS:\n\n1. Toque no botão Compartilhar 📤 (barra inferior)\n2. Role para baixo\n3. Toque em "Adicionar à Tela de Início"\n4. Toque em "Adicionar"\n\n✨ O ícone AERON aparecerá na sua tela!');
+                    } else {
+                        // Android/Desktop - já instalado ou aguardando
+                        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+                        if (isStandalone) {
+                            alert('✅ App AERON já está instalado!');
+                        } else {
+                            alert('⏳ Aguarde alguns segundos...\n\nO botão de instalação ficará disponível em breve!\n\nOu use o menu do navegador:\nChrome: Menu (⋮) → "Instalar app"');
+                        }
                     }
                     return;
                 }
                 
-                // Mostrar prompt nativo
+                // Mostrar prompt nativo (Android/Chrome)
                 deferredPrompt.prompt();
                 
                 // Esperar resposta do usuário
                 const { outcome } = await deferredPrompt.userChoice;
                 console.log(`[PWA] Resultado da instalação: ${outcome}`);
                 
-                // Esconder botão apenas se aceitou
-                if (outcome === 'accepted') {
-                    installButton.classList.remove('show');
-                }
                 deferredPrompt = null;
                 
                 // Track no Analytics
@@ -2004,10 +2003,6 @@
         window.addEventListener('appinstalled', () => {
             console.log('[PWA] App instalado com sucesso!');
             
-            // Esconder botão
-            if (installButton) {
-                installButton.classList.remove('show');
-            }
             deferredPrompt = null;
             
             // Track instalação no Analytics
