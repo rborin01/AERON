@@ -8,6 +8,73 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-7TSSN2WLMK');
+      
+      // ===== ANALYTICS AVANÇADO - FUNÇÕES DE TRACKING =====
+      
+      // Track clique em faixa
+      function trackTrackClick(trackNumber, trackName) {
+          gtag('event', 'track_click', {
+              'event_category': 'Music',
+              'event_label': `Track ${trackNumber}: ${trackName}`,
+              'track_number': trackNumber,
+              'track_name': trackName
+          });
+      }
+      
+      // Track clique no Spotify
+      function trackSpotify(location) {
+          gtag('event', 'spotify_click', {
+              'event_category': 'External_Link',
+              'event_label': `Spotify - ${location}`,
+              'link_location': location
+          });
+      }
+      
+      // Track download
+      function trackDownload(filename) {
+          gtag('event', 'download', {
+              'event_category': 'Press_Kit',
+              'event_label': filename,
+              'file_name': filename
+          });
+      }
+      
+      // Track envio de formulário
+      function trackFormSubmit(formType) {
+          gtag('event', 'form_submit', {
+              'event_category': 'Form',
+              'event_label': formType,
+              'form_type': formType
+          });
+      }
+      
+      // Track mudança de idioma
+      function trackLanguageChange(language) {
+          gtag('event', 'language_change', {
+              'event_category': 'Settings',
+              'event_label': language,
+              'language': language
+          });
+      }
+      
+      // Track clique em rede social
+      function trackSocial(network, location) {
+          gtag('event', 'social_click', {
+              'event_category': 'Social_Media',
+              'event_label': `${network} - ${location}`,
+              'network': network,
+              'location': location
+          });
+      }
+      
+      // Track scroll até seção
+      function trackSectionView(section) {
+          gtag('event', 'section_view', {
+              'event_category': 'Navigation',
+              'event_label': section,
+              'section': section
+          });
+      }
     </script>
     
     <meta charset="UTF-8">
@@ -743,35 +810,35 @@
                 <img src="AERON.png" alt="AERON" class="header-logo">
             </a>
             <nav class="header-nav">
-                <a href="#about" class="nav-link">
+                <a href="#about" class="nav-link" onclick="trackNavigation('About')">
                     <span class="lang-content active" data-lang="pt">SOBRE</span>
                     <span class="lang-content" data-lang="en">ABOUT</span>
                 </a>
-                <a href="#spotify-player" class="nav-link">
+                <a href="#spotify-player" class="nav-link" onclick="trackNavigation('Listen')">
                     <span class="lang-content active" data-lang="pt">OUÇA</span>
                     <span class="lang-content" data-lang="en">LISTEN</span>
                 </a>
-                <a href="#tracks" class="nav-link">
+                <a href="#tracks" class="nav-link" onclick="trackNavigation('Tracks')">
                     <span class="lang-content active" data-lang="pt">FAIXAS</span>
                     <span class="lang-content" data-lang="en">TRACKS</span>
                 </a>
-                <a href="#social" class="nav-link">
+                <a href="#social" class="nav-link" onclick="trackNavigation('Social')">
                     <span class="lang-content active" data-lang="pt">SOCIAL</span>
                     <span class="lang-content" data-lang="en">SOCIAL</span>
                 </a>
-                <a href="#epk" class="nav-link">
+                <a href="#epk" class="nav-link" onclick="trackNavigation('Press Kit')">
                     <span class="lang-content active" data-lang="pt">PRESS KIT</span>
                     <span class="lang-content" data-lang="en">PRESS KIT</span>
                 </a>
-                <a href="#newsletter" class="nav-link">
+                <a href="#newsletter" class="nav-link" onclick="trackNavigation('Newsletter')">
                     <span class="lang-content active" data-lang="pt">NEWSLETTER</span>
                     <span class="lang-content" data-lang="en">NEWSLETTER</span>
                 </a>
-                <a href="#contact" class="nav-link">
+                <a href="#contact" class="nav-link" onclick="trackNavigation('Contact')">
                     <span class="lang-content active" data-lang="pt">CONTATO</span>
                     <span class="lang-content" data-lang="en">CONTACT</span>
                 </a>
-                <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" class="nav-link nav-cta">
+                <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" class="nav-link nav-cta" onclick="trackSpotifyClick('Header Button')">
                     <span class="lang-content active" data-lang="pt">SPOTIFY</span>
                     <span class="lang-content" data-lang="en">SPOTIFY</span>
                 </a>
@@ -862,7 +929,8 @@
                 <span class="lang-content" data-lang="en">CONTACT</span>
             </a>
             <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" class="mobile-nav-link mobile-nav-cta"
-               onclick="document.getElementById('hamburger').classList.remove('active');
+               onclick="trackSpotify('mobile-menu');
+                        document.getElementById('hamburger').classList.remove('active');
                         document.getElementById('mobileMenu').classList.remove('active');
                         document.getElementById('menuOverlay').classList.remove('active');
                         document.body.style.overflow = '';">
@@ -904,7 +972,7 @@
                 </p>
             </div>
             
-            <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" rel="noopener" class="cta-primary">
+            <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" rel="noopener" class="cta-primary" onclick="trackSpotify('hero')">
                 <span class="lang-content active" data-lang="pt">▶ OUÇA NO SPOTIFY</span>
                 <span class="lang-content" data-lang="en">▶ LISTEN ON SPOTIFY</span>
             </a>
@@ -1021,7 +1089,7 @@
         
         <div class="tracks-grid">
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/5Jdw6xO4elKoP7HvTLkADU?si=8cb5ac93112c4cb1" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/5Jdw6xO4elKoP7HvTLkADU?si=8cb5ac93112c4cb1" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(1, 'Spark the Fire')">
                     <img src="Spark_the_Fire.png" alt="Spark the Fire" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1038,7 +1106,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/2imeOwZq0UMCyPyYx3TNlL?si=f5cdfc4d73b84692" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/2imeOwZq0UMCyPyYx3TNlL?si=f5cdfc4d73b84692" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(2, 'Beyond Chains')">
                     <img src="Spark_the_Change.png" alt="Spark the Change" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1055,7 +1123,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/2qT43iZHPc0lOvz4qTQVIo?si=1d8204c2f7864127" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/2qT43iZHPc0lOvz4qTQVIo?si=1d8204c2f7864127" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(3, 'Hunting Shadows')">
                     <img src="Hunting_Shadows.png" alt="Hunting Shadows" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1072,7 +1140,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/5qxQM7uLNcuJYcdOYg9SLK?si=3d13e9729ee146dc" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/5qxQM7uLNcuJYcdOYg9SLK?si=3d13e9729ee146dc" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(4, 'Unbreakable')">
                     <img src="Unbreakable.png" alt="Unbreakable" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1089,7 +1157,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/0H7ctsPPVssMdmJprRO7BA?si=f111499cf30f4f3f" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/0H7ctsPPVssMdmJprRO7BA?si=f111499cf30f4f3f" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(5, 'Unbreakable Steel')">
                     <img src="Unbreakable_Steel.png" alt="Unbreakable Steel" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1106,7 +1174,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/2Ua8Um59py1QwgJv72GkRv?si=ac0fb907f8f44e49" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/2Ua8Um59py1QwgJv72GkRv?si=ac0fb907f8f44e49" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(6, 'Flow State')">
                     <img src="Flow_State.png" alt="Flow State" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1123,7 +1191,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/1lAqyoy2jFDf2q9QkqRmzW?si=86f9502aa0a04909" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/1lAqyoy2jFDf2q9QkqRmzW?si=86f9502aa0a04909" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(7, 'Rise Like the Sun')">
                     <img src="Rise_Like_the_Sun.png" alt="Rise Like the Sun" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1140,7 +1208,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/26q4nnaOfRuuF450fEO4Nb?si=b969b96e4afd4dc6" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/26q4nnaOfRuuF450fEO4Nb?si=b969b96e4afd4dc6" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(8, 'Breaking the Sky')">
                     <img src="Breaking_the_Sky.png" alt="Breaking the Sky" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1157,7 +1225,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/0lWpmS1VA0Vwnwjlcv2VVa?si=df01635bf6434cfd" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/0lWpmS1VA0Vwnwjlcv2VVa?si=df01635bf6434cfd" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(9, 'Echoes of the Sky')">
                     <img src="Echoes_of_the_Sky.png" alt="Echoes of the Sky" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1174,7 +1242,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/6msWk5Xz4BqL5zb4qVUA6R?si=abad03e486d546ba" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/6msWk5Xz4BqL5zb4qVUA6R?si=abad03e486d546ba" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(10, 'Eternal Pulse')">
                     <img src="Eternal_Pulse.png" alt="Eternal Pulse" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1191,7 +1259,7 @@
             </div>
 
             <div class="track-item">
-                <a href="https://open.spotify.com/intl-pt/track/2E3kh8qcvZrYUInrtY53Df?si=a1f42e0944664de3" target="_blank" rel="noopener" class="track-link">
+                <a href="https://open.spotify.com/intl-pt/track/2E3kh8qcvZrYUInrtY53Df?si=a1f42e0944664de3" target="_blank" rel="noopener" class="track-link" onclick="trackTrackClick(11, 'Eternal Ascent')">
                     <img src="Eternal_Ascent.png" alt="Eternal Ascent" class="track-image">
                     <div class="track-info">
                         <div class="track-chapter">
@@ -1222,12 +1290,14 @@
         
         <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
             <a href="https://www.instagram.com/aeron_oficial/" target="_blank" rel="noopener" 
+               onclick="trackSocial('instagram')"
                style="padding: 20px 40px; background: rgba(255, 107, 53, 0.1); border: 2px solid var(--primary); 
                       border-radius: 50px; color: #fff; text-decoration: none; font-size: 1.2rem; font-weight: 600; 
                       transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;">
                 📸 Instagram
             </a>
             <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" rel="noopener" 
+               onclick="trackSpotifyClick('social_section')"
                style="padding: 20px 40px; background: rgba(255, 107, 53, 0.1); border: 2px solid var(--primary); 
                       border-radius: 50px; color: #fff; text-decoration: none; font-size: 1.2rem; font-weight: 600; 
                       transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;">
@@ -1260,7 +1330,7 @@
                         <span class="lang-content active" data-lang="pt">Biografia completa para press releases</span>
                         <span class="lang-content" data-lang="en">Complete biography for press releases</span>
                     </p>
-                    <a href="AERON-Bio.txt" download style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s ease;">
+                    <a href="AERON-Bio.txt" download onclick="trackBioDownload()" style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s ease;">
                         <span class="lang-content active" data-lang="pt">📥 BAIXAR</span>
                         <span class="lang-content" data-lang="en">📥 DOWNLOAD</span>
                     </a>
@@ -1376,6 +1446,70 @@
     </footer>
 
     <script>
+        // ===== GOOGLE ANALYTICS - EVENTOS AVANÇADOS =====
+        
+        // Função auxiliar para rastrear eventos
+        function trackEvent(eventName, eventParams = {}) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, eventParams);
+                console.log('📊 Analytics Event:', eventName, eventParams);
+            }
+        }
+        
+        // Rastrear cliques em botões Spotify
+        function trackSpotifyClick(location) {
+            trackEvent('spotify_click', {
+                button_location: location,
+                event_category: 'engagement',
+                event_label: 'Spotify CTA'
+            });
+        }
+        
+        // Rastrear cliques nas faixas
+        function trackTrackClick(trackNumber, trackName) {
+            trackEvent('track_click', {
+                track_number: trackNumber,
+                track_name: trackName,
+                event_category: 'engagement',
+                event_label: 'Track Gallery'
+            });
+        }
+        
+        // Rastrear download do Bio
+        function trackBioDownload() {
+            trackEvent('bio_download', {
+                event_category: 'engagement',
+                event_label: 'Press Kit Download'
+            });
+        }
+        
+        // Rastrear cliques nas redes sociais
+        function trackSocialClick(platform) {
+            trackEvent('social_click', {
+                platform: platform,
+                event_category: 'engagement',
+                event_label: 'Social Media'
+            });
+        }
+        
+        // Rastrear mudança de idioma
+        function trackLanguageChange(language) {
+            trackEvent('language_change', {
+                language: language,
+                event_category: 'engagement',
+                event_label: 'Language Switch'
+            });
+        }
+        
+        // Rastrear envio de formulários
+        function trackFormSubmission(formType) {
+            trackEvent('form_submission', {
+                form_type: formType,
+                event_category: 'conversion',
+                event_label: formType === 'newsletter' ? 'Newsletter' : 'Contact Form'
+            });
+        }
+        
         // ===== EMAIL VALIDATION =====
         function validateEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -1487,9 +1621,82 @@
                     contactButton.innerHTML = '<span>ENVIANDO...</span>';
                 });
             }
+            
+            // ===== ANALYTICS AUTOMÁTICO =====
+            
+            // Track formulário newsletter
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function() {
+                    trackFormSubmit('Newsletter');
+                });
+            }
+            
+            // Track formulário contato
+            if (contactForm) {
+                contactForm.addEventListener('submit', function() {
+                    trackFormSubmit('Contact');
+                });
+            }
+            
+            // Track cliques no Spotify
+            document.querySelectorAll('a[href*="spotify.com"]').forEach(link => {
+                link.addEventListener('click', function() {
+                    const location = this.closest('section')?.id || 'header';
+                    trackSpotify(location);
+                });
+            });
+            
+            // Track cliques em redes sociais
+            document.querySelectorAll('a[href*="instagram.com"]').forEach(link => {
+                link.addEventListener('click', function() {
+                    const location = this.closest('section')?.id || 'unknown';
+                    trackSocial('Instagram', location);
+                });
+            });
+            
+            document.querySelectorAll('a[href*="youtube.com"]').forEach(link => {
+                link.addEventListener('click', function() {
+                    const location = this.closest('section')?.id || 'unknown';
+                    trackSocial('YouTube', location);
+                });
+            });
+            
+            document.querySelectorAll('a[href*="tiktok.com"]').forEach(link => {
+                link.addEventListener('click', function() {
+                    const location = this.closest('section')?.id || 'unknown';
+                    trackSocial('TikTok', location);
+                });
+            });
+            
+            // Track downloads do Bio
+            document.querySelectorAll('a[download]').forEach(link => {
+                link.addEventListener('click', function() {
+                    const filename = this.getAttribute('download') || this.href.split('/').pop();
+                    trackDownload(filename);
+                });
+            });
+            
+            // Track scroll até seções (Intersection Observer)
+            const sections = document.querySelectorAll('section[id]');
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        trackSectionView(entry.target.id);
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+            
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
         });
         
         function setLanguage(lang) {
+            // Track language change
+            trackLanguageChange(lang);
+            
             // Update active language button
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
