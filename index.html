@@ -500,24 +500,27 @@
             display: none;
             flex-direction: column;
             justify-content: center;
-            gap: 5px;
-            width: 40px;
-            height: 40px;
-            background: transparent;
-            border: none;
+            gap: 6px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 5px;
             cursor: pointer;
-            padding: 8px;
+            padding: 10px;
             position: relative;
             z-index: 10000;
+            flex-shrink: 0;
         }
         
         .hamburger span {
             display: block;
-            width: 24px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--gold));
+            width: 25px;
+            height: 3px;
+            background: linear-gradient(90deg, #FF6B35, #FFD700);
             border-radius: 2px;
             transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(255, 107, 53, 0.5);
         }
         
         .hamburger.active span:nth-child(1) {
@@ -649,33 +652,36 @@
             .logo-main { letter-spacing: 10px; }
             .tracks-grid { grid-template-columns: 1fr; }
             
-            /* Mostrar hamburger */
+            /* FORÇAR HEADER LAYOUT */
+            .header-content {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+            }
+            
+            /* FORÇAR MOSTRAR HAMBURGER */
             .hamburger {
-                display: flex;
+                display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                position: relative !important;
             }
             
             /* Esconder navegação desktop */
             .header-nav {
-                display: none;
+                display: none !important;
             }
             
             .lang-selector-header {
-                display: none;
+                display: none !important;
+            }
+            
+            /* Ajustes de conteúdo */
+            .about, .tracks, .social, .epk, .newsletter, .contact {
+                padding: 60px 20px;
             }
         }
         
-            .header-logo {
-                order: 1;
-            }
-            
-            /* Centralizar conteúdo nas seções */
-            .container {
-                max-width: 100%;
-                padding: 0 20px;
-            }
-            
-            .about, .tracks, .social, .epk, .newsletter, .contact {
-                padding: 60px 20px;
             }
             
             /* Hero responsivo */
