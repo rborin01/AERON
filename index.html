@@ -207,7 +207,40 @@
             background: rgba(255, 255, 255, 0.05);
             padding: 6px 12px;
             border-radius: 25px;
+            align-items: center;
         }
+        
+        /* PWA INSTALL BUTTON - HEADER */
+        .pwa-install-btn {
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid rgba(255, 107, 53, 0.4);
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            margin-left: 5px;
+        }
+        
+        .pwa-install-btn.show {
+            display: flex;
+        }
+        
+        .pwa-install-btn:hover {
+            background: rgba(255, 107, 53, 0.3);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .pwa-install-btn .icon {
+            font-size: 1.1rem;
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 padding: 0 20px;
@@ -217,6 +250,20 @@
             }
             .header-logo {
                 height: 35px;
+            }
+            
+            /* PWA button - só ícone em mobile */
+            .pwa-install-btn {
+                padding: 6px 10px;
+                margin-left: 8px;
+            }
+            
+            .pwa-install-btn .text {
+                display: none;
+            }
+            
+            .pwa-install-btn .icon {
+                font-size: 1.2rem;
             }
         }
         
@@ -810,59 +857,6 @@
             }
         }
         
-        /* PWA INSTALL BUTTON */
-        .pwa-install-prompt {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10000;
-            background: linear-gradient(135deg, #FF6B35, #FFD700);
-            color: #000;
-            padding: 15px 30px;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            animation: slideUp 0.5s ease;
-        }
-        
-        .pwa-install-prompt.show {
-            display: flex;
-        }
-        
-        .pwa-install-prompt:hover {
-            transform: translateX(-50%) translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.7);
-        }
-        
-        .pwa-install-prompt .close-btn {
-            margin-left: 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            opacity: 0.7;
-        }
-        
-        .pwa-install-prompt .close-btn:hover {
-            opacity: 1;
-        }
-        
-        @keyframes slideUp {
-            from {
-                bottom: -100px;
-                opacity: 0;
-            }
-            to {
-                bottom: 20px;
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 <body>
@@ -910,6 +904,12 @@
                 <button class="lang-btn active" onclick="setLanguage('pt')">PT</button>
                 <button class="lang-btn" onclick="setLanguage('en')">EN</button>
             </div>
+            
+            <!-- Botão PWA Instalar (Desktop e Mobile) -->
+            <button id="pwaInstallBtn" class="pwa-install-btn" title="Instalar App AERON">
+                <span class="icon">📱</span>
+                <span class="text">Instalar</span>
+            </button>
             
             <!-- Botão Hamburger (Mobile) -->
             <button class="hamburger" id="hamburger" aria-label="Menu" 
@@ -1914,12 +1914,6 @@
         });
     </script>
     
-    <!-- PWA Install Button -->
-    <div id="pwaInstallPrompt" class="pwa-install-prompt">
-        <span>📱 Instalar App AERON</span>
-        <span class="close-btn" onclick="document.getElementById('pwaInstallPrompt').classList.remove('show')">✕</span>
-    </div>
-    
     <!-- PWA Service Worker Registration -->
     <script>
         // Registrar Service Worker para PWA
@@ -1959,14 +1953,14 @@
         
         // Prompt de instalação (iOS e Android)
         let deferredPrompt;
-        const installButton = document.getElementById('pwaInstallPrompt');
+        const installButton = document.getElementById('pwaInstallBtn');
         
         window.addEventListener('beforeinstallprompt', (e) => {
             console.log('[PWA] Prompt de instalação disponível');
             e.preventDefault();
             deferredPrompt = e;
             
-            // Mostrar botão de instalação
+            // Mostrar botão de instalação no header
             if (installButton) {
                 installButton.classList.add('show');
             }
@@ -1977,6 +1971,10 @@
             installButton.addEventListener('click', async () => {
                 if (!deferredPrompt) {
                     console.log('[PWA] Prompt de instalação não disponível');
+                    // Mostrar mensagem para iOS
+                    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                        alert('Para instalar no iOS:\n1. Toque em Compartilhar 📤\n2. Escolha "Adicionar à Tela de Início"');
+                    }
                     return;
                 }
                 
@@ -1987,8 +1985,10 @@
                 const { outcome } = await deferredPrompt.userChoice;
                 console.log(`[PWA] Resultado da instalação: ${outcome}`);
                 
-                // Esconder botão
-                installButton.classList.remove('show');
+                // Esconder botão apenas se aceitou
+                if (outcome === 'accepted') {
+                    installButton.classList.remove('show');
+                }
                 deferredPrompt = null;
                 
                 // Track no Analytics
