@@ -79,6 +79,15 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#FF6B35">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AERON">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/AERON.png">
+    
     <meta name="description" content="AERON - Um dos pioneiros do Neuro-Trance aplicado ao flow state e performance. Música projetada para estados elevados de consciência. Genesis: 11 capítulos de evolução sônica.">
     <meta name="keywords" content="AERON, Neuro-Trance, Genesis, flow state, música eletrônica, trance, performance, neurociência, música para foco, Rodrigo Borin">
     <meta name="author" content="Rodrigo Borin - AERON">
@@ -1846,6 +1855,69 @@
                 });
             };
         });
+                });
+            }
+        });
+    </script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Registrar Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('[PWA] Service Worker registrado com sucesso:', registration.scope);
+                        
+                        // Verificar atualizações
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            console.log('[PWA] Nova versão disponível!');
+                            
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // Nova versão disponível - mostrar notificação
+                                    console.log('[PWA] Nova versão instalada. Recarregue para atualizar.');
+                                }
+                            });
+                        });
+                    })
+                    .catch((error) => {
+                        console.log('[PWA] Falha ao registrar Service Worker:', error);
+                    });
+            });
+            
+            // Atualizar quando houver nova versão
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    window.location.reload();
+                    refreshing = true;
+                }
+            });
+        }
+        
+        // Prompt de instalação (iOS e Android)
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('[PWA] Prompt de instalação disponível');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Você pode criar um botão customizado de instalação aqui
+            // Por exemplo: mostrar banner "Instalar App"
+        });
+        
+        window.addEventListener('appinstalled', () => {
+            console.log('[PWA] App instalado com sucesso!');
+            deferredPrompt = null;
+            
+            // Track instalação no Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'app_install', {
+                    'event_category': 'PWA',
+                    'event_label': 'App Installed'
                 });
             }
         });

@@ -1,0 +1,61 @@
+{
+  "name": "AERON - Genesis",
+  "short_name": "AERON",
+  "description": "Neuro-Trance: Música Projetada para Estados Elevados de Consciência. Experience Genesis - 11 capítulos de evolução sônica.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#FF6B35",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "AERON.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "AERON.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "AERON.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["music", "entertainment"],
+  "screenshots": [
+    {
+      "src": "AERON%20GENESIS.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ouça no Spotify",
+      "short_name": "Spotify",
+      "description": "Abrir álbum Genesis no Spotify",
+      "url": "https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6",
+      "icons": [{ "src": "AERON.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Press Kit",
+      "short_name": "Press Kit",
+      "description": "Baixar Press Kit / Bio",
+      "url": "/#epk",
+      "icons": [{ "src": "AERON.png", "sizes": "192x192" }]
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded"
+  }
+}
