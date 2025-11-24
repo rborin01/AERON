@@ -678,22 +678,84 @@
             .logo-main { letter-spacing: 10px; }
             .tracks-grid { grid-template-columns: 1fr; }
             
+            /* Header mobile - FORÇA O LAYOUT */
+            .header-content {
+                padding: 0 20px !important;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                width: 100%;
+            }
+            
+            /* Logo fica à esquerda */
+            .header-logo {
+                order: 1;
+                height: 40px;
+            }
+            
             /* Esconder navegação desktop */
             .header-nav {
-                display: none;
+                display: none !important;
             }
             
             .lang-selector-header {
-                display: none;
+                display: none !important;
             }
             
-            /* Mostrar hamburger */
+            /* Hamburger fica à direita */
             .hamburger {
-                display: flex;
+                display: flex !important;
+                order: 2;
+                margin-left: auto !important;
+                flex-shrink: 0;
             }
             
-            .header-content {
+            /* Ajustes de conteúdo */
+            .hero-content,
+            .about,
+            .tracks,
+            .social,
+            .epk,
+            .newsletter,
+            .contact {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+        }
+            .header-logo {
+                order: 1;
+            }
+            
+            /* Centralizar conteúdo nas seções */
+            .container {
+                max-width: 100%;
                 padding: 0 20px;
+            }
+            
+            .about, .tracks, .social, .epk, .newsletter, .contact {
+                padding: 60px 20px;
+            }
+            
+            /* Hero responsivo */
+            .hero-content {
+                padding: 0 20px;
+                max-width: 100%;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+                max-width: 90%;
+                margin: 0 auto 30px;
+            }
+            
+            /* Títulos menores */
+            h1, .section-title {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -1388,50 +1450,63 @@
                     }
                 });
             });
-            
-            // ===== MENU HAMBURGER MOBILE =====
-            const hamburger = document.getElementById('hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuOverlay = document.getElementById('menuOverlay');
-            
-            // Toggle menu
-            function toggleMobileMenu() {
-                hamburger.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                menuOverlay.classList.toggle('active');
-                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-            }
-            
-            // Close menu
-            function closeMobileMenu() {
+        });
+    </script>
+    
+    <!-- MENU HAMBURGER MOBILE (SCRIPT SEPARADO) -->
+    <script>
+        // Variáveis globais do menu
+        let hamburger, mobileMenu, menuOverlay;
+        
+        // Close menu (FUNÇÃO GLOBAL)
+        window.closeMobileMenu = function() {
+            if (hamburger && mobileMenu && menuOverlay) {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
                 menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
             }
+        };
+        
+        // Toggle menu
+        function toggleMobileMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        // Update mobile lang buttons
+        window.updateMobileLangButtons = function() {
+            const mobileBtns = document.querySelectorAll('.mobile-lang-btn');
+            mobileBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if ((btn.textContent === 'PT' && typeof currentLang !== 'undefined' && 
+                    ((btn.textContent === 'PT' && currentLang === 'pt') || 
+                     (btn.textContent === 'EN' && currentLang === 'en')))) {
+                    btn.classList.add('active');
+                }
+            });
+        };
+        
+        // Inicializar quando DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', () => {
+            hamburger = document.getElementById('hamburger');
+            mobileMenu = document.getElementById('mobileMenu');
+            menuOverlay = document.getElementById('menuOverlay');
             
-            // Event listeners
-            hamburger.addEventListener('click', toggleMobileMenu);
-            menuOverlay.addEventListener('click', closeMobileMenu);
-            
-            // Update mobile lang buttons
-            function updateMobileLangButtons() {
-                const mobileBtns = document.querySelectorAll('.mobile-lang-btn');
-                mobileBtns.forEach(btn => {
-                    btn.classList.remove('active');
-                    if ((btn.textContent === 'PT' && currentLang === 'pt') || 
-                        (btn.textContent === 'EN' && currentLang === 'en')) {
-                        btn.classList.add('active');
+            if (hamburger && mobileMenu && menuOverlay) {
+                // Event listeners
+                hamburger.addEventListener('click', toggleMobileMenu);
+                menuOverlay.addEventListener('click', window.closeMobileMenu);
+                
+                // Close menu on ESC key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                        window.closeMobileMenu();
                     }
                 });
             }
-            
-            // Close menu on ESC key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                    closeMobileMenu();
-                }
-            });
         });
     </script>
 </body>
