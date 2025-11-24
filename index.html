@@ -1306,13 +1306,13 @@
                 <span class="lang-content" data-lang="en">Get exclusive news, releases and VIP access to special content</span>
             </p>
             
-            <form action="https://formsubmit.co/rborin01@gmail.com" method="POST" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+            <form id="newsletterForm" action="https://formsubmit.co/rborin01@gmail.com" method="POST" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
                 <input type="hidden" name="_subject" value="Nova inscrição Newsletter AERON">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://aeronoficial.com/#newsletter">
-                <input type="email" name="email" placeholder="seu@email.com" required
+                <input type="hidden" name="_next" value="https://aeronoficial.com/success.html">
+                <input type="email" name="email" id="newsletterEmail" placeholder="seu@email.com" required
                     style="flex: 1; min-width: 250px; padding: 18px 25px; border-radius: 50px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem; transition: all 0.3s ease;">
-                <button type="submit"
+                <button type="submit" id="newsletterButton"
                     style="padding: 18px 45px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; border: none; border-radius: 50px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
                     <span class="lang-content active" data-lang="pt">INSCREVER</span>
                     <span class="lang-content" data-lang="en">SUBSCRIBE</span>
@@ -1337,15 +1337,15 @@
                 </p>
             </div>
             
-            <form action="https://formsubmit.co/rborin01@gmail.com" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
+            <form id="contactForm" action="https://formsubmit.co/rborin01@gmail.com" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
                 <input type="hidden" name="_subject" value="Contato AERON - Booking/Press">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://aeronoficial.com/#contact">
-                <input type="text" name="name" placeholder="Nome / Name" required
+                <input type="hidden" name="_next" value="https://aeronoficial.com/success.html">
+                <input type="text" name="name" id="contactName" placeholder="Nome / Name" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem;">
-                <input type="email" name="email" placeholder="Email" required
+                <input type="email" name="email" id="contactEmail" placeholder="Email" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem;">
-                <select name="subject" required
+                <select name="subject" id="contactSubject" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem;">
                     <option value="" disabled selected style="color: rgba(255, 255, 255, 0.5);">Assunto / Subject</option>
                     <option value="booking" style="color: black; background: white;">Booking</option>
@@ -1353,9 +1353,9 @@
                     <option value="collaboration" style="color: black; background: white;">Collaboration</option>
                     <option value="general" style="color: black; background: white;">General Inquiry</option>
                 </select>
-                <textarea name="message" placeholder="Mensagem / Message" rows="6" required
+                <textarea name="message" id="contactMessage" placeholder="Mensagem / Message" rows="6" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem; resize: vertical;"></textarea>
-                <button type="submit"
+                <button type="submit" id="contactButton"
                     style="padding: 20px; background: linear-gradient(135deg, var(--primary), var(--gold)); color: white; border: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 2px;">
                     <span class="lang-content active" data-lang="pt">ENVIAR MENSAGEM</span>
                     <span class="lang-content" data-lang="en">SEND MESSAGE</span>
@@ -1375,6 +1375,35 @@
     </footer>
 
     <script>
+        // ===== FORM LOADING STATES =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Newsletter Form
+            const newsletterForm = document.getElementById('newsletterForm');
+            const newsletterButton = document.getElementById('newsletterButton');
+            
+            if (newsletterForm && newsletterButton) {
+                newsletterForm.addEventListener('submit', function() {
+                    newsletterButton.disabled = true;
+                    newsletterButton.style.opacity = '0.6';
+                    newsletterButton.style.cursor = 'not-allowed';
+                    newsletterButton.innerHTML = '<span>ENVIANDO...</span>';
+                });
+            }
+            
+            // Contact Form
+            const contactForm = document.getElementById('contactForm');
+            const contactButton = document.getElementById('contactButton');
+            
+            if (contactForm && contactButton) {
+                contactForm.addEventListener('submit', function() {
+                    contactButton.disabled = true;
+                    contactButton.style.opacity = '0.6';
+                    contactButton.style.cursor = 'not-allowed';
+                    contactButton.innerHTML = '<span>ENVIANDO...</span>';
+                });
+            }
+        });
+        
         function setLanguage(lang) {
             // Update active language button
             document.querySelectorAll('.lang-btn').forEach(btn => {
