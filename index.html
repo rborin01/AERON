@@ -672,13 +672,40 @@
                 display: none !important;
             }
             
+            /* Seletor de idioma mobile - COMPACTO */
             .lang-selector-header {
-                display: none !important;
+                display: flex !important;
+                gap: 5px;
+                margin-right: 10px;
             }
             
-            /* Ajustes de conteúdo */
-            .about, .tracks, .social, .epk, .newsletter, .contact {
+            .lang-selector-header .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+            
+            /* Ajustes de conteúdo - CENTRALIZAR E LIMITAR LARGURA */
+            body {
+                overflow-x: hidden;
+            }
+            
+            .hero-content,
+            .about,
+            .tracks,
+            .social,
+            .epk,
+            .newsletter,
+            .contact {
+                max-width: 100vw;
                 padding: 60px 20px;
+                margin: 0 auto;
+                box-sizing: border-box;
+            }
+            
+            /* Garantir que nada ultrapasse a tela */
+            * {
+                max-width: 100%;
+                box-sizing: border-box;
             }
         }
         
@@ -777,35 +804,68 @@
             <img src="AERON.png" alt="AERON" class="mobile-menu-logo">
         </div>
         <nav class="mobile-menu-nav">
-            <a href="#about" class="mobile-nav-link" onclick="closeMobileMenu()">
+            <a href="#about" class="mobile-nav-link" 
+               onclick="document.getElementById('hamburger').classList.remove('active');
+                        document.getElementById('mobileMenu').classList.remove('active');
+                        document.getElementById('menuOverlay').classList.remove('active');
+                        document.body.style.overflow = '';">
                 <span class="lang-content active" data-lang="pt">SOBRE</span>
                 <span class="lang-content" data-lang="en">ABOUT</span>
             </a>
-            <a href="#spotify-player" class="mobile-nav-link" onclick="closeMobileMenu()">
+            <a href="#spotify-player" class="mobile-nav-link" 
+               onclick="document.getElementById('hamburger').classList.remove('active');
+                        document.getElementById('mobileMenu').classList.remove('active');
+                        document.getElementById('menuOverlay').classList.remove('active');
+                        document.body.style.overflow = '';">
                 <span class="lang-content active" data-lang="pt">OUÇA</span>
                 <span class="lang-content" data-lang="en">LISTEN</span>
             </a>
-            <a href="#tracks" class="mobile-nav-link" onclick="closeMobileMenu()">
+            <a href="#tracks" class="mobile-nav-link" 
+               onclick="document.getElementById('hamburger').classList.remove('active');
+                        document.getElementById('mobileMenu').classList.remove('active');
+                        document.getElementById('menuOverlay').classList.remove('active');
+                        document.body.style.overflow = '';">
                 <span class="lang-content active" data-lang="pt">FAIXAS</span>
                 <span class="lang-content" data-lang="en">TRACKS</span>
             </a>
-            <a href="#social" class="mobile-nav-link" onclick="closeMobileMenu()">
+            <a href="#social" class="mobile-nav-link" 
+               onclick="document.getElementById('hamburger').classList.remove('active');
+                        document.getElementById('mobileMenu').classList.remove('active');
+                        document.getElementById('menuOverlay').classList.remove('active');
+                        document.body.style.overflow = '';">
                 <span class="lang-content active" data-lang="pt">SOCIAL</span>
                 <span class="lang-content" data-lang="en">SOCIAL</span>
             </a>
-            <a href="#epk" class="mobile-nav-link" onclick="closeMobileMenu()">
+            <a href="#epk" class="mobile-nav-link" 
+               onclick="document.getElementById('hamburger').classList.remove('active');
+                        document.getElementById('mobileMenu').classList.remove('active');
+                        document.getElementById('menuOverlay').classList.remove('active');
+                        document.body.style.overflow = '';">
                 <span class="lang-content active" data-lang="pt">PRESS KIT</span>
                 <span class="lang-content" data-lang="en">PRESS KIT</span>
             </a>
-            <a href="#newsletter" class="mobile-nav-link" onclick="closeMobileMenu()">
+            <a href="#newsletter" class="mobile-nav-link" 
+               onclick="document.getElementById('hamburger').classList.remove('active');
+                        document.getElementById('mobileMenu').classList.remove('active');
+                        document.getElementById('menuOverlay').classList.remove('active');
+                        document.body.style.overflow = '';">
                 <span class="lang-content active" data-lang="pt">NEWSLETTER</span>
                 <span class="lang-content" data-lang="en">NEWSLETTER</span>
             </a>
-            <a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()">
+            <a href="#contact" class="mobile-nav-link" 
+               onclick="document.getElementById('hamburger').classList.remove('active');
+                        document.getElementById('mobileMenu').classList.remove('active');
+                        document.getElementById('menuOverlay').classList.remove('active');
+                        document.body.style.overflow = '';">
                 <span class="lang-content active" data-lang="pt">CONTATO</span>
                 <span class="lang-content" data-lang="en">CONTACT</span>
             </a>
-            <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" class="mobile-nav-link mobile-nav-cta">
+            <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" class="mobile-nav-link mobile-nav-cta"
+               onclick="document.getElementById('hamburger').classList.remove('active');
+                        document.getElementById('mobileMenu').classList.remove('active');
+                        document.getElementById('menuOverlay').classList.remove('active');
+                        document.body.style.overflow = '';">
+
                 <span class="lang-content active" data-lang="pt">▶ SPOTIFY</span>
                 <span class="lang-content" data-lang="en">▶ SPOTIFY</span>
             </a>
