@@ -184,16 +184,17 @@
             justify-content: center;
             overflow: visible;
             padding-bottom: 60px;
-            padding-top: 80px;
+            padding-top: 120px;
         }
         .hero-bg {
             position: absolute;
             inset: 0;
             background-image: url('AERON%20GENESIS.png');
             background-size: contain;
-            background-position: center;
+            background-position: center center;
             background-repeat: no-repeat;
             z-index: 1;
+            margin-top: 40px;
         }
         .hero-bg::before {
             content: '';
@@ -1348,10 +1349,10 @@
                 <select name="subject" id="contactSubject" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem;">
                     <option value="" disabled selected style="color: rgba(255, 255, 255, 0.5);">Assunto / Subject</option>
-                    <option value="booking" style="color: black; background: white;">Booking</option>
-                    <option value="press" style="color: black; background: white;">Press / Media</option>
-                    <option value="collaboration" style="color: black; background: white;">Collaboration</option>
-                    <option value="general" style="color: black; background: white;">General Inquiry</option>
+                    <option value="booking" style="color: white; background: rgba(0, 0, 0, 0.9);">Booking</option>
+                    <option value="press" style="color: white; background: rgba(0, 0, 0, 0.9);">Press / Media</option>
+                    <option value="collaboration" style="color: white; background: rgba(0, 0, 0, 0.9);">Collaboration</option>
+                    <option value="general" style="color: white; background: rgba(0, 0, 0, 0.9);">General Inquiry</option>
                 </select>
                 <textarea name="message" id="contactMessage" placeholder="Mensagem / Message" rows="6" required
                     style="padding: 18px 25px; border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3); background: rgba(255, 255, 255, 0.05); color: white; font-size: 1rem; resize: vertical;"></textarea>
