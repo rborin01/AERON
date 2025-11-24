@@ -85,8 +85,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="AERON">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" href="/AERON.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="AERON.png">
     
     <meta name="description" content="AERON - Um dos pioneiros do Neuro-Trance aplicado ao flow state e performance. Música projetada para estados elevados de consciência. Genesis: 11 capítulos de evolução sônica.">
     <meta name="keywords" content="AERON, Neuro-Trance, Genesis, flow state, música eletrônica, trance, performance, neurociência, música para foco, Rodrigo Borin">
@@ -807,6 +807,60 @@
             
             h2 {
                 font-size: 2rem;
+            }
+        }
+        
+        /* PWA INSTALL BUTTON */
+        .pwa-install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            background: linear-gradient(135deg, #FF6B35, #FFD700);
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            animation: slideUp 0.5s ease;
+        }
+        
+        .pwa-install-prompt.show {
+            display: flex;
+        }
+        
+        .pwa-install-prompt:hover {
+            transform: translateX(-50%) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.7);
+        }
+        
+        .pwa-install-prompt .close-btn {
+            margin-left: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        
+        .pwa-install-prompt .close-btn:hover {
+            opacity: 1;
+        }
+        
+        @keyframes slideUp {
+            from {
+                bottom: -100px;
+                opacity: 0;
+            }
+            to {
+                bottom: 20px;
+                opacity: 1;
             }
         }
     </style>
@@ -1860,12 +1914,18 @@
         });
     </script>
     
+    <!-- PWA Install Button -->
+    <div id="pwaInstallPrompt" class="pwa-install-prompt">
+        <span>📱 Instalar App AERON</span>
+        <span class="close-btn" onclick="document.getElementById('pwaInstallPrompt').classList.remove('show')">✕</span>
+    </div>
+    
     <!-- PWA Service Worker Registration -->
     <script>
         // Registrar Service Worker para PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
+                navigator.serviceWorker.register('service-worker.js')
                     .then((registration) => {
                         console.log('[PWA] Service Worker registrado com sucesso:', registration.scope);
                         
@@ -1899,18 +1959,55 @@
         
         // Prompt de instalação (iOS e Android)
         let deferredPrompt;
+        const installButton = document.getElementById('pwaInstallPrompt');
         
         window.addEventListener('beforeinstallprompt', (e) => {
             console.log('[PWA] Prompt de instalação disponível');
             e.preventDefault();
             deferredPrompt = e;
             
-            // Você pode criar um botão customizado de instalação aqui
-            // Por exemplo: mostrar banner "Instalar App"
+            // Mostrar botão de instalação
+            if (installButton) {
+                installButton.classList.add('show');
+            }
         });
+        
+        // Ao clicar no botão de instalação
+        if (installButton) {
+            installButton.addEventListener('click', async () => {
+                if (!deferredPrompt) {
+                    console.log('[PWA] Prompt de instalação não disponível');
+                    return;
+                }
+                
+                // Mostrar prompt nativo
+                deferredPrompt.prompt();
+                
+                // Esperar resposta do usuário
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`[PWA] Resultado da instalação: ${outcome}`);
+                
+                // Esconder botão
+                installButton.classList.remove('show');
+                deferredPrompt = null;
+                
+                // Track no Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'pwa_prompt_response', {
+                        'event_category': 'PWA',
+                        'event_label': outcome
+                    });
+                }
+            });
+        }
         
         window.addEventListener('appinstalled', () => {
             console.log('[PWA] App instalado com sucesso!');
+            
+            // Esconder botão
+            if (installButton) {
+                installButton.classList.remove('show');
+            }
             deferredPrompt = null;
             
             // Track instalação no Analytics
