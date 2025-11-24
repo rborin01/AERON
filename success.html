@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mensagem Enviada - AERON</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="AERON.png">
+    
     <style>
         * {
             margin: 0;
@@ -12,76 +13,264 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #FF6B35;
+            --gold: #FFD700;
+            --dark: #0a0a0f;
+        }
+        
         body {
-            font-family: 'Orbitron', sans-serif;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a0a1a 100%);
-            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a0a1f 100%);
+            color: #fff;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background effects */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
         
         .container {
             max-width: 600px;
             text-align: center;
-            padding: 60px 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
             border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: successPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        @keyframes successPop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .success-icon svg {
+            width: 60px;
+            height: 60px;
+            stroke: #000;
+            stroke-width: 3;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: checkmark 0.6s ease-in-out 0.3s forwards;
+        }
+        
+        @keyframes checkmark {
+            to { stroke-dashoffset: 0; }
         }
         
         .logo {
-            font-family: 'Teko', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            color: #FFD700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            margin-bottom: 30px;
+            height: 50px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(255, 107, 53, 0.4));
         }
         
         h1 {
-            font-family: 'Teko', sans-serif;
-            font-size: 3rem;
-            color: #FF6B35;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        
-        p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 40px;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 18px 50px;
-            background: linear-gradient(135deg, #FF6B35, #FFD700);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
+            font-size: 2.5rem;
             font-weight: 700;
-            font-size: 1.1rem;
-            transition: transform 0.3s ease;
-            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
             letter-spacing: 2px;
         }
         
-        .cta-button:hover {
-            transform: scale(1.05);
+        p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        .buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            color: #000;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 107, 53, 0.2);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .social-links {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+        }
+        
+        .social-links p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--primary);
+        }
+        
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            color: #000;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 25px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <div class="logo">AERON</div>
-        <h1>✅ Mensagem Enviada!</h1>
-        <p>Obrigado pelo contato! Sua mensagem foi recebida com sucesso e responderemos em breve.</p>
-        <p>Continue acompanhando a jornada do AERON nas redes sociais.</p>
-        <a href="/" class="cta-button">Voltar ao Site</a>
+        <img src="AERON.png" alt="AERON" class="logo">
+        
+        <div class="success-icon">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 27L22 35L38 19" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        
+        <h1>MENSAGEM ENVIADA!</h1>
+        
+        <p>Obrigado por entrar em contato!</p>
+        <p>Recebi sua mensagem e vou responder em breve.</p>
+        <p class="highlight">Normalmente respondo em até 24-48 horas.</p>
+        
+        <div class="buttons">
+            <a href="index.html" class="btn btn-primary">
+                ← Voltar ao Site
+            </a>
+            <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" class="btn btn-secondary">
+                🎵 Ouça no Spotify
+            </a>
+        </div>
+        
+        <div class="social-links">
+            <p>Enquanto isso, me siga nas redes sociais:</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/aeronoficial/" target="_blank" class="social-icon" aria-label="Instagram">
+                    📷
+                </a>
+                <a href="https://www.youtube.com/@aeronoficial" target="_blank" class="social-icon" aria-label="YouTube">
+                    ▶️
+                </a>
+                <a href="https://open.spotify.com/intl-pt/artist/3cUF0vXMmqS2mJSOQWGUuF" target="_blank" class="social-icon" aria-label="Spotify">
+                    🎵
+                </a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
