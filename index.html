@@ -107,8 +107,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="AERON%20GENESIS.png" as="image">
+    <link rel="dns-prefetch" href="https://open.spotify.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Altura do header fixo */
+        }
+        
         :root {
             --primary: #FF6B35;
             --gold: #FFD700;
@@ -853,9 +864,123 @@
             }
         }
         
+        /* ==== LOADING ANIMATION ==== */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a0a1f 50%, #0a0a0f 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.5s ease;
+        }
+        
+        #loader img {
+            width: 150px;
+            height: 150px;
+            animation: logoPulse 2s ease-in-out infinite;
+        }
+        
+        #loader .loading-text {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+            letter-spacing: 3px;
+        }
+        
+        @keyframes logoPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+        
+        /* ==== BACK TO TOP BUTTON ==== */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            border: none;
+            border-radius: 50%;
+            color: #000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+        }
+        
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #backToTop:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+        }
+        
+        /* ==== SCROLL REVEAL ANIMATIONS ==== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .track-card.reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+        
+        .track-card.reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        .track-card:nth-child(1) { transition-delay: 0.1s; }
+        .track-card:nth-child(2) { transition-delay: 0.2s; }
+        .track-card:nth-child(3) { transition-delay: 0.3s; }
+        .track-card:nth-child(4) { transition-delay: 0.4s; }
+        .track-card:nth-child(5) { transition-delay: 0.5s; }
+        .track-card:nth-child(6) { transition-delay: 0.6s; }
+        .track-card:nth-child(7) { transition-delay: 0.1s; }
+        .track-card:nth-child(8) { transition-delay: 0.2s; }
+        .track-card:nth-child(9) { transition-delay: 0.3s; }
+        .track-card:nth-child(10) { transition-delay: 0.4s; }
+        .track-card:nth-child(11) { transition-delay: 0.5s; }
+        
     </style>
 </head>
 <body>
+    <!-- LOADING ANIMATION -->
+    <div id="loader">
+        <img src="AERON.png" alt="AERON Loading">
+        <div class="loading-text">LOADING...</div>
+    </div>
+    
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTop" title="Voltar ao topo">↑</button>
+    
     <!-- PROFESSIONAL FIXED HEADER -->
     <header class="main-header">
         <div class="header-content">
@@ -1032,9 +1157,13 @@
             </div>
             
             <a href="https://open.spotify.com/intl-pt/album/2OQW9vnFsR5Zp6w5Iqk0R6" target="_blank" rel="noopener" class="cta-primary" onclick="trackSpotify('hero')">
-                <span class="lang-content active" data-lang="pt">▶ OUÇA NO SPOTIFY</span>
-                <span class="lang-content" data-lang="en">▶ LISTEN ON SPOTIFY</span>
+                <span class="lang-content active" data-lang="pt">▶ OUÇA GENESIS AGORA</span>
+                <span class="lang-content" data-lang="en">▶ LISTEN TO GENESIS NOW</span>
             </a>
+            <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 15px;">
+                <span class="lang-content active" data-lang="pt">11 faixas disponíveis no Spotify</span>
+                <span class="lang-content" data-lang="en">11 tracks available on Spotify</span>
+            </p>
         </div>
     </section>
 
@@ -1109,6 +1238,115 @@
         </div>
     </section>
 
+    <!-- ABOUT THE ARTIST -->
+    <section class="about artist-bio" id="artist" style="background: linear-gradient(135deg, #1a0a1f 0%, #0a0a0f 100%); padding: 100px 20px;">
+        <div class="lang-content active" data-lang="pt">
+            <h2 class="section-title">SOBRE O ARTISTA</h2>
+            <div class="bio-content" style="max-width: 900px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--gold); margin-bottom: 30px;">
+                    Rodrigo Borin é engenheiro mecânico, empresário e produtor musical por trás do projeto AERON.
+                </p>
+                
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin: 40px 0 20px 0; font-weight: 700;">
+                    FORMAÇÃO ACADÊMICA DE ELITE
+                </h3>
+                <p>
+                    Graduado pela <strong>UFSC</strong> (Universidade Federal de Santa Catarina - melhor universidade do Brasil) 
+                    com estágio em engenharia na <strong>Alemanha</strong>, Rodrigo trabalhou por <strong>7 anos na Embraer</strong> 
+                    realizando análise estrutural de aviões em materiais compósitos avançados — trabalho que exige precisão milimétrica 
+                    e onde erros não são tolerados.
+                </p>
+                <p>
+                    Sua excelência acadêmica o levou ao <strong>ITA</strong> (Instituto Tecnológico de Aeronáutica), onde concluiu 
+                    mestrado em análise estrutural de materiais compósitos - uma das áreas mais complexas e críticas da engenharia 
+                    aeroespacial. Complementando sua formação técnica, cursou <strong>MBA pela Hult International Business School 
+                    em Boston</strong>, Massachusetts, combinando visão estratégica de negócios com expertise técnica de classe mundial.
+                </p>
+                
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin: 40px 0 20px 0; font-weight: 700;">
+                    DA ENGENHARIA AEROESPACIAL À MÚSICA
+                </h3>
+                <p>
+                    Fluente em <strong>5 idiomas</strong> (Português, Inglês, Espanhol, Alemão, Francês), Rodrigo combina sua 
+                    formação em engenharia de precisão com paixão por música eletrônica para criar AERON - um projeto pioneiro 
+                    que aplica princípios de neurociência e flow state à produção musical.
+                </p>
+                <p>
+                    Além da música, mantém interesses empresariais diversificados em tecnologia e agronegócio, incluindo operações 
+                    em fazendas de cana-de-açúcar e desenvolvimento de sistemas de trading algorítmico.
+                </p>
+                
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin: 40px 0 20px 0; font-weight: 700;">
+                    VISÃO ARTÍSTICA
+                </h3>
+                <p style="font-style: italic; font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); padding: 30px; background: rgba(255, 107, 53, 0.1); border-left: 4px solid var(--primary); margin: 30px 0;">
+                    "Minha formação em engenharia aeroespacial me ensinou que precisão e criatividade não são opostos - são complementares. 
+                    Na Embraer, eu projetava estruturas que precisavam suportar forças extremas enquanto mantinham elegância e eficiência. 
+                    Aplico a mesma filosofia à música: cada elemento tem propósito, cada frequência é intencional, cada batida é calculada 
+                    para máximo impacto emocional."
+                </p>
+                
+                <p>
+                    Pai dedicado de duas filhas (9 e 11 anos), Rodrigo equilibra suas múltiplas carreiras com vida familiar ativa 
+                    em <strong>Florianópolis, Santa Catarina</strong>.
+                </p>
+            </div>
+        </div>
+        
+        <div class="lang-content" data-lang="en">
+            <h2 class="section-title">ABOUT THE ARTIST</h2>
+            <div class="bio-content" style="max-width: 900px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--gold); margin-bottom: 30px;">
+                    Rodrigo Borin is a mechanical engineer, entrepreneur, and music producer behind the AERON project.
+                </p>
+                
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin: 40px 0 20px 0; font-weight: 700;">
+                    ELITE ACADEMIC BACKGROUND
+                </h3>
+                <p>
+                    Graduated from <strong>UFSC</strong> (Federal University of Santa Catarina - Brazil's top university) with an 
+                    engineering internship in <strong>Germany</strong>, Rodrigo worked for <strong>7 years at Embraer</strong> 
+                    performing structural analysis of aircraft using advanced composite materials — work that requires millimetric 
+                    precision where errors are not tolerated.
+                </p>
+                <p>
+                    His academic excellence led him to <strong>ITA</strong> (Aeronautics Institute of Technology), where he completed 
+                    a master's degree in structural analysis of composite materials - one of the most complex and critical areas of 
+                    aerospace engineering. Complementing his technical background, he earned an <strong>MBA from Hult International 
+                    Business School in Boston</strong>, Massachusetts, combining strategic business vision with world-class technical expertise.
+                </p>
+                
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin: 40px 0 20px 0; font-weight: 700;">
+                    FROM AEROSPACE ENGINEERING TO MUSIC
+                </h3>
+                <p>
+                    Fluent in <strong>5 languages</strong> (Portuguese, English, Spanish, German, French), Rodrigo combines his 
+                    background in precision engineering with a passion for electronic music to create AERON - a pioneering project 
+                    that applies principles of neuroscience and flow state to music production.
+                </p>
+                <p>
+                    Beyond music, he maintains diversified business interests in technology and agribusiness, including operations 
+                    in sugarcane farms and development of algorithmic trading systems.
+                </p>
+                
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin: 40px 0 20px 0; font-weight: 700;">
+                    ARTISTIC VISION
+                </h3>
+                <p style="font-style: italic; font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); padding: 30px; background: rgba(255, 107, 53, 0.1); border-left: 4px solid var(--primary); margin: 30px 0;">
+                    "My aerospace engineering background taught me that precision and creativity are not opposites - they are complementary. 
+                    At Embraer, I designed structures that needed to withstand extreme forces while maintaining elegance and efficiency. 
+                    I apply the same philosophy to music: every element has purpose, every frequency is intentional, every beat is calculated 
+                    for maximum emotional impact."
+                </p>
+                
+                <p>
+                    A dedicated father of two daughters (ages 9 and 11), Rodrigo balances his multiple careers with active family life 
+                    in <strong>Florianópolis, Santa Catarina</strong>.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- MUSIC/TRACKS -->
     <section id="spotify-player" style="background: var(--dark); padding: 100px 20px;">
         <div class="lang-content active" data-lang="pt">
@@ -1134,6 +1372,69 @@
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                 loading="lazy">
             </iframe>
+        </div>
+    </section>
+
+    <!-- SOBRE O ARTISTA (BIO EXPANDIDA) -->
+    <section class="about reveal" style="background: linear-gradient(135deg, #0a0a1f 0%, #0a0a0f 50%, #0a0a1f 100%); padding: 100px 20px;">
+        <div class="lang-content active" data-lang="pt">
+            <h2 class="section-title">SOBRE O ARTISTA</h2>
+            <div class="bio-content" style="max-width: 900px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
+                    <strong>Rodrigo Borin</strong> é engenheiro mecânico, empresário e produtor musical por trás do projeto AERON.
+                </p>
+                <p style="line-height: 1.8; margin-bottom: 20px;">
+                    Graduado pela <strong>UFSC</strong> (melhor universidade do Brasil) com estágio na Alemanha, trabalhou por 
+                    <strong>7 anos na Embraer</strong> realizando análise estrutural de aviões em materiais compósitos. 
+                    Concluiu mestrado no <strong>ITA</strong> (Instituto Tecnológico de Aeronáutica) em análise estrutural 
+                    avançada e <strong>MBA pela Hult International Business School</strong> em Boston.
+                </p>
+                <p style="line-height: 1.8; margin-bottom: 20px;">
+                    Fluente em <strong>5 idiomas</strong>, Rodrigo combina sua formação em engenharia de precisão com paixão 
+                    por música eletrônica para criar AERON - um projeto pioneiro que aplica princípios de neurociência e 
+                    flow state à produção musical.
+                </p>
+                <p style="line-height: 1.8; margin-bottom: 30px;">
+                    <strong>Pai de duas filhas</strong>, Rodrigo divide seu tempo entre empreendimentos em tecnologia, 
+                    agronegócio e sua crescente carreira como produtor de Neuro-Trance.
+                </p>
+                <blockquote style="border-left: 4px solid var(--gold); padding-left: 20px; margin: 40px 0; font-style: italic; color: var(--gold);">
+                    "Minha formação em engenharia aeroespacial me ensinou que precisão e criatividade não são opostos - são complementares. 
+                    Na Embraer, eu projetava estruturas que precisavam suportar forças extremas enquanto mantinham elegância e eficiência. 
+                    Aplico a mesma filosofia à música: cada elemento tem propósito, cada frequência é intencional, cada batida é calculada 
+                    para máximo impacto emocional."
+                </blockquote>
+            </div>
+        </div>
+        
+        <div class="lang-content" data-lang="en">
+            <h2 class="section-title">ABOUT THE ARTIST</h2>
+            <div class="bio-content" style="max-width: 900px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
+                    <strong>Rodrigo Borin</strong> is a mechanical engineer, entrepreneur, and music producer behind the AERON project.
+                </p>
+                <p style="line-height: 1.8; margin-bottom: 20px;">
+                    Graduated from <strong>UFSC</strong> (Brazil's top university) with an internship in Germany, he worked for 
+                    <strong>7 years at Embraer</strong> performing structural analysis of aircraft in composite materials. 
+                    He completed a master's degree at <strong>ITA</strong> (Aeronautics Institute of Technology) in advanced structural 
+                    analysis and an <strong>MBA from Hult International Business School</strong> in Boston.
+                </p>
+                <p style="line-height: 1.8; margin-bottom: 20px;">
+                    Fluent in <strong>5 languages</strong>, Rodrigo combines his background in precision engineering with a passion 
+                    for electronic music to create AERON - a pioneering project that applies principles of neuroscience and 
+                    flow state to music production.
+                </p>
+                <p style="line-height: 1.8; margin-bottom: 30px;">
+                    <strong>Father of two daughters</strong>, Rodrigo divides his time between ventures in technology, 
+                    agribusiness, and his growing career as a Neuro-Trance producer.
+                </p>
+                <blockquote style="border-left: 4px solid var(--gold); padding-left: 20px; margin: 40px 0; font-style: italic; color: var(--gold);">
+                    "My aerospace engineering background taught me that precision and creativity are not opposites - they are complementary. 
+                    At Embraer, I designed structures that needed to withstand extreme forces while maintaining elegance and efficiency. 
+                    I apply the same philosophy to music: every element has purpose, every frequency is intentional, every beat is calculated 
+                    for maximum emotional impact."
+                </blockquote>
+            </div>
         </div>
     </section>
 
@@ -2012,6 +2313,95 @@
                     'event_label': 'App Installed'
                 });
             }
+        });
+    </script>
+    
+    <script>
+        // ===== LOADING ANIMATION =====
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        });
+        
+        // ===== BACK TO TOP BUTTON =====
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 500) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // ===== SCROLL REVEAL ANIMATIONS =====
+        const revealElements = () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        
+        // Adicionar classe reveal em elementos automaticamente
+        document.addEventListener('DOMContentLoaded', () => {
+            // Adicionar reveal nas seções
+            document.querySelectorAll('.about, #spotify-player, #social, #epk, #newsletter, #contact').forEach(section => {
+                if (!section.classList.contains('reveal')) {
+                    section.classList.add('reveal');
+                }
+            });
+            
+            // Adicionar reveal nos track-items
+            document.querySelectorAll('.track-item').forEach(item => {
+                item.classList.add('reveal');
+            });
+            
+            // Adicionar lazy loading nas imagens de tracks (da 4ª em diante)
+            const trackImages = document.querySelectorAll('.track-image');
+            trackImages.forEach((img, index) => {
+                if (index >= 3) {
+                    img.setAttribute('loading', 'lazy');
+                }
+            });
+            
+            // Executar reveal inicial
+            revealElements();
+        });
+        
+        window.addEventListener('scroll', revealElements);
+        
+        // Lazy loading image handler
+        document.addEventListener('DOMContentLoaded', () => {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(img => imageObserver.observe(img));
         });
     </script>
 </body>
